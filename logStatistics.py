@@ -18,13 +18,27 @@ class LogStatistics(Frame):
 
         self.btnAnalyse = Btn(self, text="Analyse log", command=self.analyse)
         self.btnAnalyse.locateInside(self, H_LEFT, V_TOP)
+
+        self.btnCopy = Btn(self, text="Copy to clipboard", command=self.copy)
+        self.btnCopy.width = 120
+        self.btnCopy.locateFrom(self.btnAnalyse, H_RIGHT, V_COPY_TOP)
+
         self.lblStats = []
-        for i in range(2):
-            self.lblStats.append(Lbl(self, text="hi\n\ntest"))
-            self.lblStats[i].height = 400
-            self.lblStats[i].width = 200
+        for i in range(3):
+            self.lblStats.append(Lbl(self, anchor=NW))
+            self.lblStats[i].height = 450
+            self.lblStats[i].width = 250
             if i == 0: self.lblStats[i].locateFrom(self.btnAnalyse, H_COPY_LEFT, V_BOTTOM)
             else:      self.lblStats[i].locateFrom(self.lblStats[i - 1], H_RIGHT, V_COPY_TOP)
+
+    def copy(self):
+        """Copy the log data to clipboard"""
+        r = Tk()
+        r.withdraw()
+        r.clipboard_clear()
+        for lbl in self.lblStats:
+            r.clipboard_append(lbl.text)
+        r.destroy()
 
     def analyse(self):
         """Analyse the log data"""
@@ -49,6 +63,10 @@ class LogStatistics(Frame):
                 # Defence
                 sa.killed_defence += l.log_num2
                 sa.lost_defence += l.log_num
+
+            elif t == log.PLACE_TROOPS:
+                # Place troops
+                s.placed += l.log_num
         self.printStats()
 
     def printStats(self):
@@ -69,16 +87,19 @@ class PlayerStats():
         self.lost_attack = 0
         self.killed_defence = 0
         self.lost_defence = 0
-        self.total_conquerors_vs_1 = 0
-        self.total_troops_placed_teammate = 0
+        self.conquerors_vs_1 = 0
+        self.placed = 0
 
     def toString(self):
         """Output the statistics in a nicely formatted string"""
         return textwrap.dedent("""\
             {}:
-              Total killed: {}
-              Total lost: {}\n
-              """.format(self.player.player_name, self.killed_attack, self.lost_attack))
+              Total killed in attack: {}
+              Total lost in attack: {}
+              Total killed in defence: {}
+              Total lost in defence: {}
+              Total placed: {}\n
+              """.format(self.player.player_name, self.killed_attack, self.lost_attack, self.killed_defence, self.lost_defence, self.placed))
 
 
 if __name__ == '__main__':

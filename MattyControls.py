@@ -55,7 +55,7 @@ class Btn(Button):
         """Create a button given it's text and it's parent frame."""
         Button.__init__(self, parent, **kwargs)
         if self.place_info().get('width', '') == '':
-            self.width = 90
+            self.width = 100
         if self.place_info().get('height', '') == '':
             self.height = 26
         self.label = None
