@@ -70,7 +70,7 @@ class LogEntry():
         s = ''.join(s.split()) # Remove all whitespace
         a = s.split(',')
         if len(a) != 10:
-            return ''
+            return None
         return LogEntry(int(a[0]), int(a[1]), a[2], int(a[3]), int(a[4]), a[5], a[6], int(a[7]), int(a[8]), int(a[9]))
 
 

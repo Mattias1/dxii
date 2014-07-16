@@ -5,6 +5,7 @@ from MattyControls import *
 import logStatistics
 import inputData
 import log
+import game
 
 
 WIDTH = 750
@@ -19,13 +20,14 @@ class Application(Frame):
 
         # Some objects we need everywhere
         self.log = log.Log()
+        self.game = game.Game()
 
         # The tab widgets
         tabHolder = Notebook(master)
         tabHolder.pack(fill='both', expand='yes')
-        inputFrame = inputData.InputData(tabHolder, self.log)
+        inputFrame = inputData.InputData(tabHolder, self.log, self.game)
         tabHolder.add(inputFrame, text='Input data')
-        logStatsFrame = logStatistics.LogStatistics(tabHolder, self.log)
+        logStatsFrame = logStatistics.LogStatistics(tabHolder, self.log, self.game)
         tabHolder.add(logStatsFrame, text='Analyse game log')
 
 

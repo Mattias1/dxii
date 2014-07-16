@@ -12,9 +12,10 @@ TB_PASTE_LABEL = "Paste API content here:" + ''.join([' '] * 99)
 class InputData(Frame):
     """The frame for the input (game log, game info, map info)"""
 
-    def __init__(self, master, log):
+    def __init__(self, master, log, game):
         frame_init(self, master, True)
         self.log = log
+        self.game = game
         self.initControls()
 
     def initControls(self):
@@ -62,10 +63,17 @@ class InputData(Frame):
             s = self.tbPaste.value.split('\n')
             if len(s) < 3: # The tkinter text widget adds a newline, so <3 instead of <2 .... I think
                 return
+
             if s[0][:3] == 'LOG':
                 for i in range(1, len(s)):
                     self.log.addLog(s[i])
                 self.tbPaste.label.text = TB_PASTE_LABEL + '(Log data received)'
+
+            elif s[0][:4] == 'GAME':
+                self.game.initFromString(s[1])
+                for i in range(2, len(s)):
+                    self.game.addPlayer(s[i])
+                self.tbPaste.label.text = TB_PASTE_LABEL + '(Game data received)'
         except:
                 self.tbPaste.label.text = TB_PASTE_LABEL + '(Error)'
 
