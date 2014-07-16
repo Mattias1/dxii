@@ -26,7 +26,7 @@ class Application(Frame):
         tabHolder = Notebook(master)
         tabHolder.pack(fill='both', expand='yes')
         inputFrame = inputData.InputData(tabHolder, self.log, self.game)
-        tabHolder.add(inputFrame, text='Input data')
+        tabHolder.add(inputFrame, text='Load game data')
         logStatsFrame = logStatistics.LogStatistics(tabHolder, self.log, self.game)
         tabHolder.add(logStatsFrame, text='Analyse game log')
 

@@ -1,10 +1,10 @@
 class Game():
     """The game class"""
 
-    def __init__(self, game_id=0, map_id=0, nr_of_players=0):
-        self.game_id       = game_id
-        self.map_id        = map_id
-        self.nr_of_players = nr_of_players
+    def __init__(self):
+        self.game_id       = 0
+        self.map_id        = 0
+        self.nr_of_players = 0
         self.players       = []
 
     def addPlayer(self, s):
