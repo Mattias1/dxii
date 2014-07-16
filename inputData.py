@@ -37,7 +37,7 @@ class InputData(Frame):
             game_id = int(self.tbGameNr.value)
         except:
             self.lblFeedback.text = "Error: Invalid game id"
-            raise
+            return
 
         urls = ["http://dominating12.com/lib/ajax/api/log-info.php?game_id=" + str(game_id), 
                 "http://dominating12.com/lib/ajax/api/game-info.php?game_id=" + str(game_id)]
@@ -71,7 +71,6 @@ class InputData(Frame):
                 self.lblFeedback.text = "Parsing data... (game done)"
         except:
             self.lblFeedback.text = "Error: can't read data"
-            raise
         self.lblFeedback.text = "Data received succesfully"
 
 

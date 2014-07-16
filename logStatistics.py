@@ -36,6 +36,7 @@ class LogStatistics(Frame):
         r = Tk()
         r.withdraw()
         r.clipboard_clear()
+        r.clipboard_append("Game " + str(self.game.game_id) + " statistics\n\n")
         for lbl in self.lblStats:
             r.clipboard_append(lbl.text)
         r.destroy()
