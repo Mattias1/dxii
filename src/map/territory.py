@@ -6,8 +6,8 @@ class Territory():
         self.name = name
         self.x = x
         self.y = y
-        
+
         self.connections = []
 
-    def addConnection(self, other)
+    def addConnection(self, other):
         self.connections.append(other)

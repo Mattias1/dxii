@@ -4,8 +4,8 @@ class Map():
     def __init__(self, map_id, name, w, h, imageUrl):
         self.id = map_id
         self.name = name
-        self.width = width
-        self.height = height
+        self.width = w
+        self.height = h
 
         self.territories = {}
 
@@ -15,6 +15,6 @@ class Map():
         self.territories[terr.id] = terr
 
     def getTerritoryByID(self, terrID):
-        if terr.id in self.territories:
-            return terr[terrID]
+        if terrID in self.territories:
+            return self.territories[terrID]
         return None
