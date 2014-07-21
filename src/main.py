@@ -4,6 +4,7 @@ from tkinter.ttk import *
 from MattyControls import *
 import logStatistics
 import inputData
+import simulation
 import log
 import game
 
@@ -29,6 +30,8 @@ class Application(Frame):
         tabHolder.add(inputFrame, text='Load game data')
         logStatsFrame = logStatistics.LogStatistics(tabHolder, self.log, self.game)
         tabHolder.add(logStatsFrame, text='Analyse game log')
+        simulationFrame = simulation.Simulation(tabHolder, self.log, self.game)
+        tabHolder.add(simulationFrame, text='Simulation')
 
 
 def main():
