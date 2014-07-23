@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.ttk import *
 from MattyControls import *
+from PIL import Image, ImageTk
 
 import maps.mapparser
 
@@ -16,6 +17,7 @@ class Simulation(Frame):
 
         # Hardcoded map for now
         self.map = maps.mapparser.MapParser.fromURL('http://dominating12.com/lib/ajax/api/map-info.php?map_id=27')
+        self.img = self.loadImg("space.png") # We must keep track of the reference ourselves, because tkinter is a C++ library and doesn't do it for us :S (this includes keeping track of the simulation object of course) - as soon as this reference is garbage collected the image dissapears.... :(:(:(
 
         self.initControls(master)
 
@@ -33,6 +35,7 @@ class Simulation(Frame):
     def draw(self):
         self.g.delete(ALL) # Because the tkinter canvas stores all the objects, so it's nothing like the HTML5 canvas where you draw and forget. Now we can draw and delete though, so sort of OK.
         
+        self.drawImg(100, 100, self.img)
         for t in self.map.territories.values():
             self.g.create_text(t.y, t.x, anchor="center", text=t.name, fill="black", font="Consolas 10")
 
@@ -41,6 +44,12 @@ class Simulation(Frame):
 
     def click_right(self, event):
         pass
+
+    def loadImg(self, path):
+        return ImageTk.PhotoImage(Image.open("../img/" + path))
+
+    def drawImg(self, x, y, img):
+        self.g.create_image(x, y, image=img)
 
 if __name__ == '__main__':
     import main
