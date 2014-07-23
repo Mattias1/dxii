@@ -2,12 +2,12 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.ttk import *
 from MattyControls import *
-import logStatistics
-import inputData
-import simulation
-import log
-import game
 
+import game
+import inputData
+import log
+import logStatistics
+import simulation
 
 WIDTH = 750
 HEIGHT = 500

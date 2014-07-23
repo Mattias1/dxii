@@ -1,7 +1,8 @@
-import map
-import territory
 import json
 import urllib.request
+
+import maps.map
+import maps.territory
 
 class MapParser():
     @staticmethod
@@ -14,10 +15,10 @@ class MapParser():
     def fromJSON(s):
         obj = json.loads(s)
 
-        mapObj = map.Map(obj['map_id'], obj['name'], obj['width'], obj['height'], obj['url'])
+        mapObj = maps.map.Map(obj['map_id'], obj['name'], obj['width'], obj['height'], obj['url'])
 
         for i, v in enumerate(obj['territories']):
-            t = territory.Territory(v['id'], v['name'], v['x'], v['y'])
+            t = maps.territory.Territory(v['id'], v['name'], v['x'], v['y'])
             mapObj.addTerritory(t)
 
         for i, v in enumerate(obj['connections']):
