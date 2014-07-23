@@ -6,7 +6,7 @@ class Map():
         self.name = name
         self.width = w
         self.height = h
-        # Todo, do something with the imageUrl
+        self.imageUrl = imageUrl
 
         self.territories = {}
 
