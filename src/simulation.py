@@ -19,8 +19,10 @@ class Simulation(Frame):
 
         # Hardcoded map for now
         self.map = maps.mapparser.MapParser.fromURL('http://dominating12.com/lib/ajax/api/map-info?map_id=1')
-        #self.img = self.loadImg("space.png") # We must keep track of the reference ourselves, because tkinter is a C++ library and doesn't do it for us :S (this includes keeping track of the simulation object of course) - as soon as this reference is garbage collected the image dissapears.... :(:(:(
+
         self.img = self.loadImgFromWeb(self.map.imageUrl)
+
+        self.territoryCircle = ImageTk.PhotoImage(Image.open('../gfx/territory_circles.png').crop((180,0,216,36)))
 
         self.initControls(master)
 
@@ -41,13 +43,16 @@ class Simulation(Frame):
         self.drawImg(0, 0, self.img)
         
         # Connection lines
-        for t in self.map.territories.values():
-            for c in t.connections:
-                self.g.create_line(t.y, t.x, c.y, c.x, fill="gray")
+        #for t in self.map.territories.values():
+        #    for c in t.connections:
+        #        self.g.create_line(t.y, t.x, c.y, c.x, fill="gray")
 
         # Territory names
+        #for t in self.map.territories.values():
+        #    self.g.create_text(t.y, t.x, anchor="center", text=t.name, fill="black", font="Consolas 10")
+        
         for t in self.map.territories.values():
-            self.g.create_text(t.y, t.x, anchor="center", text=t.name, fill="black", font="Consolas 10")
+            self.drawImg(t.y, t.x, self.territoryCircle)
 
     def click_left(self, event):
         pass
@@ -56,7 +61,7 @@ class Simulation(Frame):
         pass
 
     def loadImg(self, path):
-        return ImageTk.PhotoImage(Image.open("../img/" + path))
+        return ImageTk.PhotoImage(Image.open("../gfx/" + path))
 
     def loadImgFromWeb(self, url):
         request = urllib.request.Request(url)
