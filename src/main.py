@@ -17,7 +17,7 @@ class Application(Frame):
     def __init__(self, master=None):
         """The constructor"""
         Frame.__init__(self, master)
-        master.title("Test")
+        master.title("DXII log tools.")
 
         # Some objects we need everywhere
         self.log = log.Log()
@@ -30,8 +30,8 @@ class Application(Frame):
         tabHolder.add(inputFrame, text='Load game data')
         logStatsFrame = logStatistics.LogStatistics(tabHolder, self.log, self.game)
         tabHolder.add(logStatsFrame, text='Analyse game log')
-        simulationFrame = simulation.Simulation(tabHolder, self.log, self.game)
-        tabHolder.add(simulationFrame, text='Simulation')
+        # simulationFrame = simulation.Simulation(tabHolder, self.log, self.game)
+        # tabHolder.add(simulationFrame, text='Simulation')
 
 
 def main():
